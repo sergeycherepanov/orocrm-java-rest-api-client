@@ -1,0 +1,38 @@
+group 'oro'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = '1.8'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.oroinc.api.Api'
+    }
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.oroinc.api.Api'
+    }
+    baseName = project.name + '-fat'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
