@@ -1,17 +1,25 @@
 # Java Rest Api Client Example for Oro Applications
 
-### Development
+## Prepare
 
-For build source code run:
+Replace host, api key and the user name in `src/main/java/com/oroinc/api/ServiceGenerator.java`
 
-**Windows**
 
-```
-gradlew.bat build
-```
-
-**Linux / OSX**
+### Build
 
 ```
 ./gradlew build
 ```
+
+### Create Jar
+
+```
+./gradlew fatJar
+```
+
+### Run Jar
+
+```
+java -jar build/libs/api-fat-1.0.jar
+```
+
